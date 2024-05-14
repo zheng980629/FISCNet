@@ -32,7 +32,7 @@ python test.py -opt /FISCNet/options/test/FISCNet.yml
 Updating the paths in configure files of /FISCNet/options/train/FISCNet.yml
 ```
 
-3. Run the testing commands.
+3. Run the training commands.
  ```
 python train.py -opt /FISCNet/options/train/FISCNet.yml
 ```
