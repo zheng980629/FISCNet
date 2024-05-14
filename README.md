@@ -1,23 +1,38 @@
-# Rubik's Cube: High-Order Channel Interactions with a Hierarchical Receptive Field (NeurIPS2023)
+# Frequency Integration and Spatial Compensation Network for Infrared and Visible Image Fusion
 
-Naishan Zheng, Man Zhou, Chong Zhou, Chen Change Loy
+Naishan Zheng, Man Zhou, Jie Huang, Feng Zhao
 
-S-Lab, Nanyang Technological University   
+ University of Science and Technology of China
 
 ---
->Image restoration techniques, spanning from the convolution to the transformer paradigm, have demonstrated robust spatial representation capabilities to deliver high-quality performance. Yet, many of these methods, such as convolution and the Feed Forward Network (FFN) structure of transformers, primarily leverage the basic first-order channel interactions and have not maximized the potential benefits of higher-order modeling. To address this limitation, our research dives into understanding relationships within the channel dimension and introduces a simple yet efficient, high-order channel-wise operator tailored for image restoration. Instead of merely mimicking high-order spatial interaction, our approach offers several added benefits: Efficiency: It adheres to the zero-FLOP and zero-parameter
-principle, using a spatial-shifting mechanism across channel-wise groups. Simplicity: It turns the favorable channel interaction and aggregation capabilities into element-wise multiplications and convolution units with 1 × 1 kernel. Our new formulation expands the first-order channel-wise interactions seen in previous works to arbitrary high orders, generating a hierarchical receptive field akin to a Rubik’s cube through the combined action of shifting and interactions. Furthermore, our proposed Rubik’s cube convolution is a flexible operator that can be incorporated into existing image restoration networks, serving as a drop-in replacement for the standard convolution unit with fewer parameters overhead. We conducted experiments across various low-level vision tasks, including image denoising, low-light image enhancement, guided image super-resolution, and image de-blurring. The results consistently demonstrate that our Rubik’s cube operator enhances performance across all tasks.>
+>Infrared and visible image fusion aims to synthesize a fused image that emphasizes the salient objects while retaining the intricate texture and visual quality from both infrared and visible images. In opposite to the majority of existing deep learning-based fusion approaches, which predominantly focus on spatial information and neglect the valuable frequency information, we propose a novel method that delves into both domains simultaneously to tackle the infrared and visible image fusion task. Specifically, we first analyze the frequency characteristics of the two modality images via Fourier transform, and observe that fusion results with complementary attributes  from source images can be effectively attained by directly incorporating their phase components. To this end, we propose a Frequency Integration and Spatial Compensation Network (FISCNet), consisting of two core designs: a frequency integration component and a spatial compensation component. The former integrates prominent objects from the source images while maintaining the visual perception from the visible image in the frequency domain, and the latter improves the detailed texture  and emphasizes the salient objects through a meticulous compensation mechanism in the spatial domain. Extensive experiments on various benchmarks demonstrate the superiority of our method over state-of-the-art alternatives in terms of both salience preservation and texture fidelity.
 ---
+<img src="./asserts/observation.png" width="800px"/>
+<img src="./asserts/framework.png" width="800px"/>
 
 
-## Applications
-### 🚀: Low-Light Image Enhancement
+## 🚀: How to test
 
+1. Update the paths of image sets and pre-trained models.
+ ```
+Updating the paths in configure files of /FISCNet/options/test/FISCNet.yml
+```
 
-### 🚀: Image Deblur
+2. Run the testing commands.
+ ```
+python test.py -opt /FISCNet/options/test/FISCNet.yml
+```
 
+## 🚀: How to train
 
-### 🚀: Image Denoising
+1. Download saliency maps on the M3FD dataset from [Google Drive](https://drive.google.com/drive/folders/1CIsMmt6XZH4UMjca4K1DhLew_xNGrXv0?usp=drive_link) or run VSM.m to generate maps for your own data.
 
+2. Update the paths of image sets in the training configuration.
+ ```
+Updating the paths in configure files of /FISCNet/options/train/FISCNet.yml
+```
 
-### 🚀: Classification
+3. Run the testing commands.
+ ```
+python train.py -opt /FISCNet/options/train/FISCNet.yml
+```
